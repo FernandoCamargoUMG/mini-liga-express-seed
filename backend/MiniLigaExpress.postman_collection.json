@@ -1,0 +1,77 @@
+    {
+    "info": {
+        "name": "MiniLiga Express API",
+        "description": "Colección de endpoints para la prueba técnica MiniLiga Express",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+        "name": "Listar equipos",
+        "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+            "raw": "http://localhost:8000/api/teams",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8000",
+            "path": ["api", "teams"]
+            }
+        }
+        },
+        {
+        "name": "Crear equipo",
+        "request": {
+            "method": "POST",
+            "header": [
+            { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+            "mode": "raw",
+            "raw": "{\n  \"name\": \"Barcelona\"\n}"
+            },
+            "url": {
+            "raw": "http://localhost:8000/api/teams",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8000",
+            "path": ["api", "teams"]
+            }
+        }
+        },
+        {
+        "name": "Registrar resultado de partido",
+        "request": {
+            "method": "POST",
+            "header": [
+            { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+            "mode": "raw",
+            "raw": "{\n  \"home_score\": 2,\n  \"away_score\": 1\n}"
+            },
+            "url": {
+            "raw": "http://localhost:8000/api/matches/1/result",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8000",
+            "path": ["api", "matches", "1", "result"]
+            }
+        }
+        },
+        {
+        "name": "Obtener standings",
+        "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+            "raw": "http://localhost:8000/api/standings",
+            "protocol": "http",
+            "host": ["localhost"],
+            "port": "8000",
+            "path": ["api", "standings"]
+            }
+        }
+        }
+    ]
+    }
