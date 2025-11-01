@@ -24,4 +24,6 @@ export class StandingsComponent {
       error: () => { this.loading = false; }
     });
   }
+
+  trackByTeam = (_: number, row: any) => row?.team ?? _;
 }

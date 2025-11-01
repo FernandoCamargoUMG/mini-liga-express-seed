@@ -1,9 +1,12 @@
-<nav style="margin: 1rem 0; text-align: center;">
-  <a routerLink="/teams" routerLinkActive="active" style="margin-right: 1rem;">Equipos</a>
-  <a routerLink="/standings" routerLinkActive="active">Clasificación</a>
-  <style>
-    .active { font-weight: bold; text-decoration: underline; }
-  </style>
-</nav>
+<header class="navbar">
+  <div class="container inner">
+    <div class="brand">MiniLiga Express</div>
+    <span class="spacer"></span>
+    <a routerLink="/teams" routerLinkActive="active" class="navlink">Equipos</a>
+    <a routerLink="/standings" routerLinkActive="active" class="navlink">Clasificación</a>
+  </div>
+  </header>
 
-<router-outlet></router-outlet>
+<main class="container mt-2">
+  <router-outlet></router-outlet>
+</main>

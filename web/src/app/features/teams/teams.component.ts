@@ -39,4 +39,6 @@ export class TeamsComponent {
       }
     });
   }
+
+  trackByName = (_: number, item: any) => item?.name ?? _;
 }

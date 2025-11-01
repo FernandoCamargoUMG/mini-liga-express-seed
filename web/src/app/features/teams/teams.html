@@ -1,20 +1,31 @@
-<h2>Equipos</h2>
-<form [formGroup]="teamForm" (ngSubmit)="addTeam()">
-	<input formControlName="name" placeholder="Nombre del equipo" />
-	<button type="submit" [disabled]="teamForm.invalid">Agregar</button>
-</form>
+<section class="card">
+	<h2>Equipos</h2>
+	<form [formGroup]="teamForm" (ngSubmit)="addTeam()" class="form-row">
+		<input class="input" formControlName="name" placeholder="Nombre del equipo" />
+		<button class="btn" type="submit" [disabled]="teamForm.invalid">Agregar</button>
+	</form>
+	<div class="mt-1 muted" *ngIf="teamForm.invalid">Ingresa un nombre para agregar un equipo</div>
+</section>
 
-<table *ngIf="teams.length">
-	<thead>
-		<tr>
-			<th>Nombre</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr *ngFor="let team of teams">
-			<td>{{ team.name }}</td>
-		</tr>
-	</tbody>
-</table>
-
-<div *ngIf="loading">Cargando...</div>
+<section class="card mt-2">
+	<div class="table-wrap" *ngIf="teams.length; else emptyState">
+		<table>
+			<thead>
+				<tr>
+					<th>Nombre</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let team of teams; trackBy: trackByName">
+					<td>{{ team.name }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<ng-template #emptyState>
+		<div class="muted">No hay equipos aún. Agrega el primero ☝️</div>
+	</ng-template>
+	<div class="mt-1 loading" *ngIf="loading">Cargando...</div>
+	<div class="mt-1"><span class="badge">Total: {{ teams.length }}</span></div>
+  
+</section>
