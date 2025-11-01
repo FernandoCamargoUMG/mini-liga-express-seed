@@ -1,0 +1,20 @@
+<h2>Equipos</h2>
+<form [formGroup]="teamForm" (ngSubmit)="addTeam()">
+	<input formControlName="name" placeholder="Nombre del equipo" />
+	<button type="submit" [disabled]="teamForm.invalid">Agregar</button>
+</form>
+
+<table *ngIf="teams.length">
+	<thead>
+		<tr>
+			<th>Nombre</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let team of teams">
+			<td>{{ team.name }}</td>
+		</tr>
+	</tbody>
+</table>
+
+<div *ngIf="loading">Cargando...</div>

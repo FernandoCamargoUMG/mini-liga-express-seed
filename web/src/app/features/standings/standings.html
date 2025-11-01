@@ -1,0 +1,22 @@
+<h2>Clasificación</h2>
+<table *ngIf="standings.length">
+	<thead>
+		<tr>
+			<th>Equipo</th>
+			<th>Jugados</th>
+			<th>Goles a favor</th>
+			<th>Diferencia</th>
+			<th>Puntos</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let row of standings">
+			<td>{{ row.team }}</td>
+			<td>{{ row.played }}</td>
+			<td>{{ row.goals_for }}</td>
+			<td>{{ row.goal_diff }}</td>
+			<td>{{ row.points }}</td>
+		</tr>
+	</tbody>
+</table>
+<div *ngIf="loading">Cargando...</div>
