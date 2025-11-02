@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.miniliga.app',
-  appName: 'mobile',
+  appId: 'io.ionic.starter',
+  appName: 'mobile-clean',
   webDir: 'www'
 };
 
