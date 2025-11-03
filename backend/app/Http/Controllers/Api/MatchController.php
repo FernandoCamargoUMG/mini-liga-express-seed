@@ -11,9 +11,43 @@ class MatchController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $query = Matches::with(['homeTeam', 'awayTeam']);
+
+        // Si se pide solo partidos pendientes (sin resultado)
+        if ($request->query('played') === 'false') {
+            $query->whereNull('home_score')->whereNull('away_score');
+        }
+        // Si se pide solo partidos jugados
+        elseif ($request->query('played') === 'true') {
+            $query->whereNotNull('home_score')->whereNotNull('away_score');
+        }
+
+        $matches = $query->orderBy('created_at', 'asc')->get();
+
+        return response()->json([
+            'success' => true,
+            'matches' => $matches->map(function ($match) {
+                return [
+                    'id' => $match->id,
+                    'home_team' => [
+                        'id' => $match->homeTeam->id,
+                        'name' => $match->homeTeam->name
+                    ],
+                    'away_team' => [
+                        'id' => $match->awayTeam->id,
+                        'name' => $match->awayTeam->name
+                    ],
+                    'home_score' => $match->home_score,
+                    'away_score' => $match->away_score,
+                    'played_at' => $match->played_at,
+                    'is_played' => !is_null($match->home_score) && !is_null($match->away_score),
+                    'created_at' => $match->created_at,
+                    'updated_at' => $match->updated_at
+                ];
+            })
+        ]);
     }
 
     /**
