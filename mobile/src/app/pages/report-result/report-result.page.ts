@@ -38,12 +38,23 @@ export class ReportResultPage implements OnInit {
   }
 
   loadMatchDetails() {
-    // Mock data - en implementación real obtendrías el partido específico
-    const mockMatches = [
-      { id: 1, home_team_id: 1, away_team_id: 2, homeTeam: { id: 1, name: 'Dragons' }, awayTeam: { id: 2, name: 'Sharks' } },
-      { id: 2, home_team_id: 3, away_team_id: 4, homeTeam: { id: 3, name: 'Tigers' }, awayTeam: { id: 4, name: 'Wolves' } }
-    ];
-    this.match = mockMatches.find(m => m.id === this.matchId) || null;
+    // Obtener el partido específico del backend
+    this.api.getMatch(this.matchId).subscribe({
+      next: (match) => {
+        if (match) {
+          this.match = {
+            id: match.id,
+            home_team_id: match.home_team.id,
+            away_team_id: match.away_team.id,
+            homeTeam: { id: match.home_team.id, name: match.home_team.name },
+            awayTeam: { id: match.away_team.id, name: match.away_team.name }
+          };
+        }
+      },
+      error: (error) => {
+        console.error('Error loading match details:', error);
+      }
+    });
   }
 
   async submitResult() {

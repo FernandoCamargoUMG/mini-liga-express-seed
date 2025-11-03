@@ -29,38 +29,23 @@ export class MatchesPage implements OnInit {
   loadMatches() {
     this.loading = true;
     
-    // Mock data mientras no esté el endpoint
-    setTimeout(() => {
-      this.matches = [
-        {
-          id: 1,
-          home_team_id: 1,
-          away_team_id: 2,
-          homeTeam: { id: 1, name: 'Dragons' },
-          awayTeam: { id: 2, name: 'Sharks' }
-        },
-        {
-          id: 2,
-          home_team_id: 3,
-          away_team_id: 4,
-          homeTeam: { id: 3, name: 'Tigers' },
-          awayTeam: { id: 4, name: 'Wolves' }
-        }
-      ];
-      this.loading = false;
-    }, 1000);
-
-    // Cuando esté el endpoint real:
-    // this.api.getPendingMatches().subscribe({
-    //   next: (matches) => {
-    //     this.matches = matches;
-    //     this.loading = false;
-    //   },
-    //   error: (error) => {
-    //     console.error('Error loading matches:', error);
-    //     this.loading = false;
-    //   }
-    // });
+    // Usar partidos reales del backend
+    this.api.getPendingMatches().subscribe({
+      next: (matches) => {
+        this.matches = matches.map((match: any) => ({
+          id: match.id,
+          home_team_id: match.home_team.id,
+          away_team_id: match.away_team.id,
+          homeTeam: { id: match.home_team.id, name: match.home_team.name },
+          awayTeam: { id: match.away_team.id, name: match.away_team.name }
+        }));
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error loading matches:', error);
+        this.loading = false;
+      }
+    });
   }
 
   doRefresh(event: RefresherCustomEvent) {
