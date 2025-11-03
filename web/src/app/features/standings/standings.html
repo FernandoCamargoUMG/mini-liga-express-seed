@@ -1,0 +1,29 @@
+<section class="card">
+	<h2>Clasificación</h2>
+	<div class="table-wrap" *ngIf="standings.length; else emptyStandings">
+		<table>
+			<thead>
+				<tr>
+					<th>Equipo</th>
+					<th>Jugados</th>
+					<th>Goles a favor</th>
+					<th>Diferencia</th>
+					<th>Puntos</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let row of standings; trackBy: trackByTeam">
+					<td>{{ row.team }}</td>
+					<td>{{ row.played }}</td>
+					<td>{{ row.goals_for }}</td>
+					<td>{{ row.goal_diff }}</td>
+					<td>{{ row.points }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<ng-template #emptyStandings>
+		<div class="muted">No hay datos de clasificación aún.</div>
+	</ng-template>
+	<div class="mt-1 loading" *ngIf="loading">Cargando...</div>
+</section>

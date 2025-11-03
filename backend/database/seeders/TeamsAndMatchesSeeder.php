@@ -12,7 +12,8 @@ class TeamsAndMatchesSeeder extends Seeder
      */
     public function run(): void
     {
-        $teams = collect(['Barcelona', 'Atletico de Madrid', 'Real Madrid', 'Real Betis'])
+        // Crea equipos
+        $teams = collect(['Dragons','Sharks','Tigers','Wolves'])
             ->map(fn($name) => \App\Models\Team::create(['name' => $name]));
 
         // Crea partidos sin resultado
