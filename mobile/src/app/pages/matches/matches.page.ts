@@ -29,7 +29,7 @@ export class MatchesPage implements OnInit {
   loadMatches() {
     this.loading = true;
     
-    // Usar partidos reales del backend
+    // Obtiene partidos pendientes
     this.api.getPendingMatches().subscribe({
       next: (matches) => {
         this.matches = matches.map((match: any) => ({
@@ -58,7 +58,7 @@ export class MatchesPage implements OnInit {
   trackByMatchId(index: number, match: any): number {
     return match.id;
   }
-
+// Navega a la página de reporte de resultado
   reportResult(matchId: number) {
     this.router.navigate(['/report-result', matchId]);
   }
